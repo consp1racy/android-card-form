@@ -4,7 +4,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.2'
-        classpath 'io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.3'
     }
 }
 
@@ -13,3 +12,13 @@ allprojects {
         jcenter()
     }
 }
+
+// http://blog.joda.org/2014/02/turning-off-doclint-in-jdk-8-javadoc.html
+//if (JavaVersion.current().isJava8Compatible()) {
+    allprojects {
+        tasks.withType(Javadoc) {
+            options.addStringOption('Xdoclint:none', '-quiet')
+            excludes = ['**/*.kt']
+        }
+    }
+//}
